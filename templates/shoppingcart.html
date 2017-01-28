@@ -1,0 +1,204 @@
+<div class="col-lg-12 cart">
+	<div class="row">
+		<ul class="list-block">
+		<li class="header">
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-12 col-sm-12 col-md-12 col-xs-8">
+						<div class="row">
+							<h1>Your Shopping Bag</h1>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 itemCount">
+                      <span>{{products.productsInCart.length}} Items</span>
+					</div>
+					<div class="col-lg-9 col-md-9 col-sm-8 hidden-xs" ng-if="products.productsInCart.length">
+						<div class="col-6 col-md-6 col-sm-6 col-xs-12">
+                           <span></span>
+						</div>
+						<div class="col-2 col-md-2 col-sm-2 col-xs-12"><span class="prop">SIZE</span></div>
+						<div class="col-2 col-md-2 col-sm-2 col-xs-12"><span class="prop">QTY</span></div>
+						<div class="col-2 col-md-2 col-sm-2 col-xs-12"><span class="prop">PRICE</span></div>
+					</div>	
+				</div>
+			</div>	
+		</li>
+		<li ng-if="!products.productsInCart.length">
+			<div class="col-lg-12 empty-cart">
+				<div class="row">
+					<p>your cart is empty.add your desire product in cart.</p>
+				</div>
+			</div>
+		</li>	
+		 <li ng-repeat="product in products.productsInCart track by $index" class="list">
+			<div class="col-lg-12">
+				<div class="row">
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+				        <img src="{{product.p_imagePath}}" alt="">
+				     </div>
+				     <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+					<div class="col-6 col-md-6 col-sm-6 col-xs-12 productInfo">
+						<h3>
+							<span class="h1-child1">{{product.p_variation}}</span>
+						    <span class="h1-child2">{{product.p_name}}</span>
+						</h3>
+	                    <div class="stylecode">
+	                    	<span>style#: {{product.p_style | uppercase}}</span>
+	                    </div>
+	                    <div class="colorCode">
+	                    	<span>color:{{product.p_selected_color.name}}</span>
+	                    </div>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 size">
+						<span class="visible-xs">size</span><span>{{product.p_selected_size.code}}</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 qty">
+						<span class="visible-xs text-qty">QTY</span><span class="qty-in-list">{{product.p_quantity}}</span>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 price">
+						<span>{{product.c_currency}}{{product.p_price}}</span>
+					</div>
+					
+				     </div>
+                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 operation">
+					<a ng-href="javascript:void();" ng-click="editItem(product)" class="edit" data-toggle="modal" data-target="#myModal">Edit</a>|
+					<a ng-href="javascript:void();" ng-click="removeProduct(product)" class="remove"> X Remove</a>|
+					<a ng-href="javascript:void();" ng-click="saveItem(product)" class="save">Save for later</a>
+				</div>
+				</div>
+
+			</div>
+
+		</li>
+	</ul>
+	<div class="col-lg-12 help-section" ng-if="products.productsInCart.length">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-hidden info-help hidden-xs">
+				<div class="need-help">
+					<span>
+					Need Help<br/>
+					or have Question?
+				</span>
+				</div>
+				<div class="toll-free">
+					<span>
+					Call customer service<br/>
+					1-800-555-5555
+				</span>
+				</div>
+				<div class="chat">
+					<a href="#">
+					Chat with one of<br/>
+					our stylists
+				</a>
+				</div>
+				<div class="exchange">	
+                    <a href="#">
+					See return <br/>
+					& exchange policy
+				</a>
+				</div>
+
+			</div>
+			<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+				<ul class="total">
+					<li class="coupan">
+						<div class="col-lg-12">
+						     <div class="row">
+								<div class="col-lg-6 col-xs-12 coupan-text">
+									<span class="row">Enter promotion code <br/> or gift card</span>
+								</div>
+								<div class="col-lg-6 coupan-form">
+									<div class="row">
+										<form action="_Self">
+											<input type="text">
+											<button type="suubmit">Apply</button>
+										</form>
+									</div>
+								</div>	
+						     </div>
+					    </div>
+				   </li>
+					<li><div class="col-lg-12 subtotal">
+						    <div class="row">
+						    	<div class="col-lg-6 col-xs-6">
+									<span class="row">
+										Subtotal
+									</span>
+								</div>
+								<div class="col-lg-6 col-xs-6 price">
+									<span class="row">
+										{{total | currency}}
+									</span>
+								</div>
+						    </div>
+					    </div>
+					</li>
+					<li><div class="col-lg-12 subtotal" ng-if="dicountedPrice">
+						<div class="row">
+							<div class="col-lg-6 col-xs-6">
+							<span class="row">
+								discount coupan name {{coupanName}}
+							</span>
+						</div>
+						<div class="col-lg-6 col-xs-6 price">
+							<span class="row">
+								{{dicountedPrice | currency}}
+							</span>
+						</div>
+						</div>
+					</div></li>
+					<li><div class="col-lg-12 subtotal" ng-if="grandTotal >= 50">
+						<div class="row">
+							<div class="col-lg-6 col-xs-6">
+							<span class="row">
+								Estimated shipping*
+								<label>
+									You qualify for free shipping<br/>
+									because your order is $50*
+								</label>
+							</span>
+						</div>
+						<div class="col-lg-6 col-xs-6 price" >
+							<span class="row free">
+								FREE
+							</span>
+						</div>
+						</div>
+					</div></li>
+					<li>
+						<div class="col-lg-12 grandtotal subtotal ">
+							<div class="row">
+								<div class="col-lg-6 col-xs-8 estimated-total">
+									<span class="row">
+										Estimated Total<br/>
+										<label>
+											Tax will applied during checkout
+										</label>
+									</span>
+								</div>
+								<div class="col-lg-6 col-xs-4 price">
+									<span class="row">
+										{{grandTotal | currency}}
+									</span>
+								</div>
+							</div>
+					   </div>
+					   <div class="col-lg-12 checkout-block">
+					   	    <div class="row">
+					   	    	<a href="">continue shopping</a>
+					   	    	<button>checkout</button>
+					   	    	<p>
+					   	    	secure checkout. shopping is always safe & secure
+					   	    </p>
+					   	    </div>
+					   	    
+					   </div>
+				   </li>
+			   </ul>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</div>

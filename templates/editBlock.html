@@ -1,0 +1,48 @@
+<div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="col-lg-6 col-lg-push-6 col-xs-12 product-image">
+	        	<img src="{{product.p_imagePath}}" alt="">
+	        </div>
+	        <div class="col-lg-6 col-lg-pull-6 col-xs-12 ">
+	        	<h3>{{product.p_variation}}</h3>
+	        	<div class="row price">
+	        		<span class="dollar">{{product.c_currency}}</span>
+	        	    <span class="value">{{product.p_price}}</span>
+	        	</div>
+	        	<div>
+	        		
+	        		<div class="color-group">
+	        			<span class="paisley">paisley</span>
+	        			<div>
+	        				<span ng-class="{active:(product.p_selected_color.name === color.name)}" ng-repeat="color in product.p_available_options.colors" ng-click="changecolor(product, color.name, color.hexcode)" style="background:{{color.hexcode}};" title="{{color.name}}"></span>
+	        			</div>
+	        		</div>
+	        		<div class="select-grp">
+
+	        			<select name="size" ng-model="product.p_selected_size" ng-options="list as list.name for list in product.p_available_options.sizes">
+	        				<option value="">Size</option>
+	        			</select>
+	        		    <select name="qty" ng-model="product.p_quantity" ng-options="item.value as item.name for item in items">
+	        		    	
+	        		    </select>
+	        		</div>
+	        		<div class="editbtn">
+	        			<button ng-click="editcartItem(product)" class="edit close">Edit</button>
+	        			<a href="#">See product details</a>
+	        		</div>
+	        	</div>
+	        </div>
+	        
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+	<div class="modal-backdrop fade out"></div>
+</div>
